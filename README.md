@@ -17,6 +17,7 @@ Connecting the service providers and application developers through the blockcha
 
 ## Milestone 1 related docs
 [P2P Gateway Design](./docs/p2p_sys_design.md)
+[M1 Testing guide](./tutorials/m1_testing/README.md)
 
 ---
 
