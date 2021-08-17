@@ -15,6 +15,10 @@ Connecting the service providers and application developers through the blockcha
 * The decentralized Billing System in Apron Network will enable the ability to provide services without worrying about censoring from authorities for service providers, and service users will enjoy those services anywhere without barriers.
 
 
+## Milestone 1 related docs
+[P2P Gateway Design](./docs/p2p_sys_design.md)
+
+---
 
 ## Resources
 
@@ -29,4 +33,5 @@ Connecting the service providers and application developers through the blockcha
 [Graphics](./graphics)
 
 [Brand Assets](./brandassets)
+
 
