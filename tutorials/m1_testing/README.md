@@ -9,7 +9,8 @@ Note: all those steps should be done on Linux system with docker installed.
 
 ### Prepare the docker images
 
-Please download docker images from **TODO** and **TODO**,
+Please download apron node images from [here](https://drive.google.com/drive/folders/1W9X3BAYs9mU2VuBsnPd2axxRtPkXS9co?usp=sharing),
+and apron-deployer image from **TODO**,
 then load the image into system by this two commands:
 
 ```
