@@ -36,15 +36,27 @@ the test Apron network should be ready.
 ### Setup Marketplace
 
 Follow the instruction in [project page](https://github.com/Apron-Network/apron-marketplace) to setup a running market place.
-Make sure the two contract addresses are updated to `public/configAddress.js`. For the output above, the file should be:
+Make sure the two contract addresses are updated to `public/js/contractAddress.js`. For the output above, the file should be like:
 
 ```js
-window.configuration = {
+const configuration = {
     market: "5HX9NRcDTWnkWHcwGWosB97K2V29nQXy6VErcP4mwEUWnV1D",
-    statistics: "5CsBynhpjvPycJ19BbCPaipgURVE8SWkz9DHvBAYQqoh1tR6",
-    basepath: "localhost:9944"
+    statistics:'5CsBynhpjvPycJ19BbCPaipgURVE8SWkz9DHvBAYQqoh1tR6',
+    basepath:'localhost',
+    name:'Apron Market'
 };
+window.configuration = configuration;
 ```
+
+After configuration done, run those commands:
+
+```
+yarn
+yarn start
+```
+
+After dependencies installed successfully, the webpage will be opened with default browser.
+The address is *http://127.0.0.1:3000* and can be accessed by browser manually if not pop up.
 
 ### Setup Test Domain
 
