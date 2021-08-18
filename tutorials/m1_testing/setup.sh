@@ -15,15 +15,15 @@ fi
 
 docker network create --subnet=192.168.0.0/16 m1-testing
 
-pushd alice
+cd alice
 docker-compose up -d
 sleep 10
-docker-compose logs apron-gateway | grep 'Host ID:' | tail -1 | awk '{print "GATEWAY_BS_PEER_ID="$NF}' >../bob/env
-popd
+docker-compose logs apron-gateway-alice | grep 'Host ID:' | tail -1 | awk '{print "GATEWAY_BS_PEER_ID="$NF}' >../bob/env
+cd ..
 
-pushd bob
+cd bob
 docker-compose --env-file=env up -d
-popd
+cd ..
 
 cd alice
 docker-compose logs -f

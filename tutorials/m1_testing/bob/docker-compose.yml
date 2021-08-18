@@ -1,7 +1,7 @@
 version: "3.2"
 
 services:
-  apron-gateway:
+  apron-gateway-bob:
     image: apron-node:latest
     ports:
       - "8083:8082"
@@ -11,16 +11,7 @@ services:
     networks:
       m1-testing:
         ipv4_address: 192.168.0.6
-      bob-internal:
-
-  httpbin:
-    image: kennethreitz/httpbin
-    networks:
-      bob-internal:
-
-
 
 networks:
   m1-testing:
     external: true
-  bob-internal:
