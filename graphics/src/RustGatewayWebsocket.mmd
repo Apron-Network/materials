@@ -1,0 +1,24 @@
+sequenceDiagram
+    participant Client
+    participant CSGW as ClientSideGateway
+    participant SGGW as ServiceSideGateway
+    participant Service
+
+    Client ->> CSGW: Send Websocket Request
+    activate CSGW
+    note left of CSGW: Locate ServiceSideGateway
+    deactivate CSGW
+    CSGW ->> SGGW: Request in SendRequset package
+    SGGW ->> Service: Send Websocket Request
+
+    loop Data From Client Side
+        Client ->> CSGW: Websocket Data
+        CSGW ->> SGGW: Data in SendRequset package
+        SGGW ->> Service: Send Websocket Data
+    end
+
+    loop Data From Service Side
+        Service ->> SGGW: Websocket Data
+        SGGW ->> CSGW: Data in SendRequset package
+        CSGW ->> Client: Send Websocket Data
+    end

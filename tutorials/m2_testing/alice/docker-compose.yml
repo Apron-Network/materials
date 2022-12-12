@@ -1,0 +1,65 @@
+version: "3.2"
+
+services:
+  apron-node:
+    image: apron_node_base:latest
+    ports:
+      - "9944:9944"
+      - "9933:9933"
+      - "30333:30333"
+    command: bash -c "/apron-node --base-path /data --dev --ws-external --rpc-external --rpc-methods Unsafe --node-key 0000000000000000000000000000000000000000000000000000000000000001 --rpc-cors all"
+    volumes:
+      - ./data:/data
+    networks:
+      m2-testing:
+        ipv4_address: 192.168.0.3
+
+  apron-explorer:
+    image: apron_node_base:latest
+    ports:
+      - "3001:3001"
+    command: bash -c "cd /apps && serve -p 3001 build"
+    networks:
+      m2-testing:
+        ipv4_address: 192.168.0.30
+
+  apron-gateway-alice:
+    image: apron_gateway:latest
+    ports:
+      - "8082:8082"
+      - "8080:8080"
+      - "2145:2145"
+    command: bash -c "/apron-gateway --secret-key-seed 1 --market-contract-addr ${MARKET_CONTRACT} --stat-contract-addr ${STAT_CONTRACT} --ws-endpoint ws://apron-node:9944"
+    networks:
+      m2-testing:
+        ipv4_address: 192.168.0.4
+
+  apron-service-reg-tool:
+    image: apron_service_reg:latest
+    ports:
+      - "3000:3000"
+    command: bash -c "cd / && serve -p 3000 service_reg"
+    networks:
+      m2-testing:
+        ipv4_address: 192.168.0.31
+
+  # httpbin-service and ws-echo-service are used for testing gateway
+  httpbin-service:
+    image: kennethreitz/httpbin:latest
+    ports:
+      - "8923:80"
+    networks:
+      m2-testing:
+        ipv4_address: 192.168.0.32
+
+  ws-echo-service:
+    image: jmalloc/echo-server:latest
+    ports:
+      - "10000:8080"
+    networks:
+      m2-testing:
+        ipv4_address: 192.168.0.33
+
+networks:
+  m2-testing:
+    external: true

@@ -1,0 +1,17 @@
+version: "3.2"
+
+services:
+  apron-gateway-bob:
+    image: apron-node:latest
+    ports:
+      - "8083:8082"
+      - "8081:8080"
+      - "2146:2145"
+    command: bash -c "/gateway -peers /ip4/192.168.0.4/tcp/2145/p2p/${GATEWAY_BS_PEER_ID}"
+    networks:
+      m1-testing:
+        ipv4_address: 192.168.0.6
+
+networks:
+  m1-testing:
+    external: true

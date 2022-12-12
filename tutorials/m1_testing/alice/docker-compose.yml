@@ -1,0 +1,52 @@
+version: "3.2"
+
+services:
+  apron-node:
+    image: apron-node:latest
+    ports:
+      - "9944:9944"
+      - "9933:9933"
+      - "30333:30333"
+    command: bash -c "/apron-node --base-path /data --dev --ws-external --rpc-external --rpc-methods Unsafe --node-key 0000000000000000000000000000000000000000000000000000000000000001 --rpc-cors all"
+    volumes:
+      - ./data:/data
+    networks:
+      m1-testing:
+        ipv4_address: 192.168.0.3
+
+  polkadot-frontend:
+    image: apron-node:latest
+    ports:
+      - "3001:3001"
+    command: bash -c "cd /apps && serve -p 3001 build"
+    networks:
+      m1-testing:
+        ipv4_address: 192.168.0.30
+
+  apron-gateway-alice:
+    image: apron-node:latest
+    ports:
+      - "8082:8082"
+      - "8080:8080"
+      - "2145:2145"
+    command: bash -c "/gateway"
+    networks:
+      m1-testing:
+        ipv4_address: 192.168.0.4
+
+  apron-deployer:
+    image: apron-deployer:latest
+    ports:
+      - "4000:4000"
+    depends_on:
+      - apron-node
+      - apron-gateway-alice
+    working_dir: "/app"
+    networks:
+      m1-testing:
+        ipv4_address: 192.168.0.40
+
+
+networks:
+  m1-testing:
+    external: true

@@ -1,0 +1,17 @@
+version: "3.2"
+
+services:
+  apron-gateway-bob:
+    image: apron_gateway:latest
+    ports:
+      - "8083:8082"
+      - "8081:8080"
+      - "2146:2145"
+    command: bash -c "/apron-gateway --peer /ip4/192.168.0.4/tcp/2145/p2p/12D3KooWPjceQrSwdWXPyLLeABRXmuqt69Rg3sBYbU1Nft9HyQ6X --p2p-port 2146 --secret-key-seed 2 --market-contract-addr ${MARKET_CONTRACT} --stat-contract-addr ${STAT_CONTRACT} --ws-endpoint ws://apron-node:9944"
+    networks:
+      m2-testing:
+        ipv4_address: 192.168.0.6
+
+networks:
+  m2-testing:
+    external: true
